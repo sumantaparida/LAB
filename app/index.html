@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Angular JS</title>
+  <link rel="stylesheet" href="css/style.min.css">
+  <script type="text/javascript" src="js/angular.min.js"></script>
+  <script type="text/javascript" src="js/angular-route.min.js"></script>
+  <script type="text/javascript" src="js/app.min.js"></script>
+</head>
+<body>
+  <header class="container-fluid nopadding" ng-controller="headercontroller">
+    <nav>
+      <div class="container">
+        <div class="col-xs-6 text-left nopadding">
+          <div class="hamburgers" id="hamburgers" ng-click="toggle = !toggle" ng-class="{'expand' : toggle}">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+        <div class="col-xs-6 text-right nopadding right-side-menu">
+          <p>
+            <span ng-click="searchBox = !searchBox" class="search icon"></span>
+            <span class="profile-img">
+              <img src="img/profile-img.jpg" alt="">
+            </span>
+          </p>
+        </div>
+      </div>
+    </nav>
+    <div ng-show="searchBox" class="container search-box">
+      <div class="col-xs-12 nopadding">
+        <div class="input-group">
+          <div class="input-group-btn">
+            <button type="button" class="btn btn-default">Content <span class="caret"></span></button>
+          </div>
+          <input type="text" class="form-control" placeholder="Search for...">
+          <div class="input-group-btn">
+            <button type="button" class="btn btn-default">Go!</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 navigation">
+      <div class="container">
+        <ul class="nav-box">
+          <li>
+            <span class="icon"></span>
+            <span>Passport</span>
+          </li>
+          <li>
+            <span class="icon"></span>
+            <span>Projects</span>
+          </li>
+          <li>
+            <span class="icon"></span>
+            <span>Workgroups</span>
+          </li>
+          <li>
+            <span class="icon"></span>
+            <span>Role Profiles</span>
+          </li>
+          <li class="active">
+            <span class="icon"></span>
+            <span>Communities</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
+  <div class="container-fluid nopadding" ng-controller="namecontroller">
+    <div class="content-wrapper">
+      <div class="container">
+        <div class="col-xs-12 col-sm-2 left-box nopadding">
+          <span class="icon"></span>
+        </div>
+        <div class="col-xs-12 col-sm-8 center-box nopadding">
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. with the release of Letraset sheets containing Lorem Ipsum passages, including versions of Lorem Ipsum.</p>
+        </div>
+        <div class="col-xs-12 col-sm-2 right-box nopadding">
+          <span ng-click="config = !config"><img src="img/setting.jpg" alt=""></span>
+          <div class="cog-dropdown" ng-show="config">
+            <ul>
+              <li>Passport</li>
+              <li>Projects</li>
+              <li>Workgroups</li>
+              <li>Role Profiles</li>
+              <li>Communities</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="col-xs-12 nopadding filter-wrapper">
+        <div class="col-xs-12 col-sm-3 nopadding filter-box-left">
+          <input type="text" placeholder="Filter.." ng-model="test">
+        </div>
+        <div class="col-xs-12 col-sm-7 nopadding filter-box-center">
+          <ul>
+            <li ng-repeat="letter in alphabet track by $index " ng-modal="test" ng-click="activateLetter(letter)" ng-class="{'active':letter==test}">{{letter}}</li>
+          </ul>
+        </div>
+        <div class="col-xs-12 col-sm-2 nopadding filter-box-right">
+          <div class="icon"></div>
+          <div class="popover">Email selected members</div>
+        </div>
+      </div>
+      <!-- // Data List start -->
+      <div class="col-xs-12 nopadding data-wrapper">
+        <ul>
+          <li ng-repeat="names in name | limitTo:limit | filter:test | orderBy: 'nm' as results">
+            <div class="data-left">
+              <label>
+                <input type="checkbox" id="{{ names.nm }}">
+                <label for="{{ names.nm }}">
+                  <span class="imgThumb"><img src="img/data-list-img.jpg" alt=""></span>
+                  <span class="checkBox">
+                    <span></span>
+                  </span>
+                </label>
+              </label>
+            </div>
+            <div class="data-right">
+              <span>{{ names.nm }}</span>
+              <span>allison.bridges@ualbany.edu</span>
+            </div>
+          </li>
+        </ul>
+        <div class="col-xs-12 nopadding load-more text-center">
+          <button class="btn" type="button" name="button" ng-click="loadMore()">Load more</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
